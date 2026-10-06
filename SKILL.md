@@ -1,5 +1,6 @@
 ---
 name: typography
+license: MIT
 description: Choose and refine typefaces, hierarchy, spacing, and grids for design work. Use for font pairing, typography systems, editorial or interface typesetting, and typography audits; preserve established brand choices. Does not replace a full product-design workflow or create custom font files.
 ---
 

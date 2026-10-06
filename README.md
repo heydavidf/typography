@@ -1,7 +1,5 @@
 # Typography
 
-Preparation draft: the owner’s licence choice and independent reviewer selection are pending. Installation awaits the corresponding `LICENSE` file. This draft is not release-ready.
-
 Make reading feel considered, interfaces easier to scan, and display type more deliberate. Typography is an agent skill for choosing and refining type, hierarchy, spacing and grids while preserving an existing identity.
 
 It starts with actual content and the reading task, then delivers a focused critique, implemented refinement or reusable system with concrete settings and honest verification. It works without Counterform, reference books or downloaded fonts.
@@ -32,7 +30,7 @@ if [ -f SKILL.md ] && [ -f LICENSE ] && [ -f references/type-and-composition.md 
     echo 'Copied typography. Reload your host and check its skill list.'
   fi
 else
-  echo 'A complete package is required: SKILL.md, references/ and an owner-selected LICENSE. This draft awaits its licence choice.'
+  echo 'Run this from the complete repository root containing SKILL.md, LICENSE and references/.'
   exit 1
 fi
 ```
