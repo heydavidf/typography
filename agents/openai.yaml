@@ -1,0 +1,4 @@
+interface:
+  display_name: "Typography"
+  short_description: "Shape readable, expressive type and grid systems"
+  default_prompt: "Use $typography to improve the typography and grid of this design while preserving its established identity."

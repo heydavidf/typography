@@ -1,0 +1,57 @@
+* { box-sizing: border-box; }
+html { font-size: 100%; }
+body { overflow-wrap: anywhere; margin: 0; color: #222722; background: #f3f1e9; }
+main { margin: auto; padding: 3rem 2rem; max-width: 76rem; }
+p { margin: 0 0 1em; }
+h1, h2 { margin: 0; }
+a { color: inherit; text-underline-offset: .2em; }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid #9b3a20; outline-offset: 3px; }
+button, input { font: inherit; max-width: 100%; }
+button { border: 0; padding: .8em 1.1em; background: #223c34; color: white; white-space: normal; }
+input { border: 1px solid #536257; padding: .65em; width: 100%; }
+.caption, .eyebrow { font-size: .875rem; line-height: 1.5; }
+.eyebrow { letter-spacing: .09em; text-transform: uppercase; }
+/* Same stack and copy across the comparison. No font downloads. */
+.editorial { font-family: Georgia, 'Times New Roman', serif; }
+.editorial h1 { font-size: clamp(2.4rem, 1.6rem + 2.5vw, 4.8rem); line-height: 1.08; letter-spacing: -.025em; max-width: 16ch; margin: .45em 0 .6em; }
+.editorial .prose { font-size: 1.125rem; line-height: 1.65; max-width: 62ch; }
+.editorial h2 { font-size: 1.65rem; line-height: 1.25; margin: 1.7em 0 .55em; }
+.editorial .caption { max-width: 58ch; }
+.comparison { font-family: system-ui, sans-serif; }
+.comparison > header { padding: 2.5rem 2rem; max-width: 76rem; margin: auto; }
+.comparison > header h1 { font-size: 2rem; line-height: 1.15; margin: .5em 0; }
+.comparison main { padding-top: 0; display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 2rem; }
+.panel { min-width: 0; background: #fffdf7; padding: 1.7rem; border-top: 2px solid #223c34; }
+.panel-label { font-family: system-ui,sans-serif; font-size: .875rem; margin-bottom: 2rem; line-height: 1.5; }
+.before { font-family: Georgia, 'Times New Roman', serif; font-size: .875rem; line-height: 1.18; }
+.before h2 { font-size: 1.3rem; font-weight: bold; margin: 0 0 .25em; }
+.before h3 { font-size: 1rem; margin: 1rem 0 .2rem; }
+.before .caption { font-size: .75rem; }
+.after { font-family: Georgia, 'Times New Roman', serif; }
+.after h2 { font-size: 2.75rem; line-height: 1.08; letter-spacing: -.025em; max-width: 16ch; margin-bottom: .6em; }
+.after .prose { font-size: 1.125rem; line-height: 1.65; max-width: 62ch; }
+.after h3 { font-size: 1.45rem; line-height: 1.25; margin: 1.6em 0 .55em; }
+.interface { font-family: Arial, Helvetica, sans-serif; font-size: 1rem; line-height: 1.5; background: #f3f6f4; }
+.interface h1 { font-size: 2rem; line-height: 1.2; margin: .35em 0 .5em; }
+.interface header { margin-bottom: 2rem; }
+.interface .invoices { list-style: none; padding: 0; }
+.interface .invoice { display: grid; grid-template-columns: minmax(0,2fr) minmax(0,1fr) minmax(0,1fr); gap: 1rem; padding: 1.1rem 0; border-top: 1px solid #88948b; }
+.interface .invoice > div { min-width: 0; overflow-wrap: anywhere; }
+.interface .label { font-size: .875rem; color: #435449; display: block; }
+.interface .number { font-variant-numeric: tabular-nums; }
+.interface .error { border-left: .25rem solid #8d2d1c; padding: 1rem; color: #8d2d1c; background: #fffaf7; margin: 1rem 0; }
+.interface label { display: block; max-width: 32rem; margin: 1.5rem 0; }
+.poster { font-family: Arial, Helvetica, sans-serif; background: #edee54; color: #171e19; font-size: 1rem; line-height: 1.5; }
+.poster h1 { font-weight: 900; font-size: clamp(3rem, 1.5rem + 6vw, 8rem); line-height: 1.02; letter-spacing: -.04em; margin: .35em 0 .3em; max-width: 14ch; overflow-wrap: anywhere; }
+.poster .details { display: grid; grid-template-columns: minmax(0,2fr) minmax(0,1fr); gap: 2rem; border-top: 3px solid; padding-top: 1.5rem; margin-top: 4rem; }
+.poster .date { font-size: 1.65rem; line-height: 1.25; font-weight: bold; }
+@media (max-width: 44rem) {
+ main { padding: 2rem 1.25rem; }
+ .comparison main, .poster .details { grid-template-columns: minmax(0,1fr); }
+ .comparison > header { padding: 2rem 1.25rem; }
+ .panel { padding: 1.2rem; }
+ .after h2 { font-size: 2.2rem; }
+ .interface .invoice { grid-template-columns: minmax(0,1fr); }
+ .poster h1 { font-size: clamp(1.4rem, 1.2rem + 2vw, 3rem); max-width: none; }
+ .poster .details { margin-top: 2rem; }
+}
