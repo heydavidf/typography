@@ -1,0 +1,15 @@
+# Keeps the pinned action commits in .github/workflows/ci.yml up to date: one grouped PR a month,
+# and only versions that have been out for at least 7 days.
+# The skill itself has no package dependencies.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    cooldown:
+      default-days: 7
+    groups:
+      actions:
+        patterns: ["*"]
+    open-pull-requests-limit: 2
