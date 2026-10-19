@@ -29,36 +29,36 @@ For Codex use `--agent codex`, and for Grok use `--agent grok`. `gh skill instal
 Without GitHub CLI, clone the repository and copy the skill folder into your agent's skills folder. Run this in a POSIX shell such as bash or zsh. It never overwrites an existing installation:
 
 ```sh
-git clone https://github.com/heydavidf/typography.git typography-repo
 TYPOGRAPHY_SKILLS_DIR="$HOME/.claude/skills"   # change this to your agent's skills folder
-if [ ! -f typography-repo/skills/typography/SKILL.md ]; then
-  echo "typography-repo/skills/typography/SKILL.md not found. Check that the clone finished."
-elif [ -e "$TYPOGRAPHY_SKILLS_DIR/typography" ]; then
+if [ -e "$TYPOGRAPHY_SKILLS_DIR/typography" ]; then
   echo "Typography is already installed in $TYPOGRAPHY_SKILLS_DIR. Move that copy aside before updating."
-else
+elif git clone https://github.com/heydavidf/typography.git typography-repo; then
   mkdir -p "$TYPOGRAPHY_SKILLS_DIR" && cp -R typography-repo/skills/typography "$TYPOGRAPHY_SKILLS_DIR/" && echo "Installed in $TYPOGRAPHY_SKILLS_DIR/typography. Reload your agent."
+else
+  echo "The clone failed. If a typography-repo folder already exists here, remove it or run this in another folder."
 fi
 ```
 
-If you downloaded a ZIP instead, copy its `skills/typography` folder the same way.
+The clone also gives you the `examples/` folder used below. If you downloaded a ZIP instead, copy its `skills/typography` folder the same way.
 
 ### After installing
 
 Confirm the destination contains `typography/SKILL.md` and `typography/references/`. For automatic activation, follow your host's own reload/discovery instructions and check that Typography is listed. Automatic discovery across different hosts is not established by this package. If discovery is unavailable, explicitly ask your agent to read the installed `SKILL.md` and follow its relative references.
 
-**Upgrading from an earlier copy:** the skill used to sit at the root of this repository, and the old manual install copied the whole repository. It now lives in `skills/typography/` and only that folder is installed. Remove your old installed `typography` folder (keep any notes you added to it), then install again with either route above. The skill's instructions and references are unchanged.
+**Upgrading from an earlier copy:** the skill used to sit at the root of this repository, and the old manual install copied the whole repository. It now lives in `skills/typography/` and only that folder is installed. The manual copy refuses to overwrite an existing install, and `gh skill install` will not replace one unless you confirm or pass `--force`, so first move your old installed `typography` folder aside (copy out any notes you added to it), then install again. The skill's instructions and references are unchanged.
 
 ## Ask your agent
 
 ```text
 Install the Typography skill from https://github.com/heydavidf/typography
 by following its README: use gh skill install if GitHub CLI is available,
-otherwise the manual copy, and keep any existing installation. Then read
-the installed typography/SKILL.md and refine a copy of examples/editorial.html
-from the repository in a working folder I choose. Keep the copy and font
-stack. Deliver the HTML, exact typography settings, before/after reasons
-and checks actually run. Use the public references only; do not install
-fonts or publish anything.
+otherwise the manual copy. If Typography is already installed, ask me
+before replacing it. Then read the installed typography/SKILL.md. Get
+examples/editorial.html and examples/specimens.css from the repository
+(the installed skill does not include them) and refine a copy in a working
+folder I choose. Keep the copy and font stack. Deliver the HTML, exact
+typography settings, before/after reasons and checks actually run. Use the
+public references only; do not install fonts or publish anything.
 ```
 
 If already installed, say “Use Typography to refine this page, preserving its established typefaces,” and supply the page, its design authority and the desired output. In hosts supporting named skill syntax, `$typography` is also a useful explicit invocation.
@@ -75,7 +75,7 @@ The skill gives design guidance, not a universal pairing score, a replacement fo
 
 System font stacks make the bundled specimens self-contained, but exact glyphs vary by platform. A real project must inspect its licensed assets, supported weights, axes, languages and fallback behavior. If an asset or renderer is missing, the agent should state what is missing, preserve the established choice and distinguish a proposal from a verified render.
 
-Release checks use a fresh macOS restricted filesystem with synthetic fixtures, Markdown validation and Chromium rendering. They do not establish automatic discovery in every agent host, real browser zoom, print proof quality or full WCAG conformance. Read the example notes for the distinction between a root-font-size probe and browser zoom.
+Every push to `main` and every pull request runs the checks in [`.github/workflows/ci.yml`](.github/workflows/ci.yml): skill layout, tests for those check scripts, Agent Skills format, a tripwire for personal paths, junk files and silenced checks, secret scanning and local links. A weekly run repeats the checks and also tests external links. Before a release the maintainer also installs the skill in a fresh, restricted macOS environment and has an agent apply it to the fictional briefs; those checks run outside this repository, and the example pages were last rendered in Chromium when they changed. None of this establishes automatic discovery in every agent host, real browser zoom, print proof quality or full WCAG conformance. Read the example notes for the distinction between a root-font-size probe and browser zoom.
 
 Counterform is an optional specimen/export companion when separately available. The skill and examples do not require it or another unpublished skill.
 
@@ -83,6 +83,6 @@ Counterform is an optional specimen/export companion when separately available. 
 
 With GitHub CLI, run `gh skill update typography` to check for and install a newer version. With a manual copy, preserve local customizations, compare the new `skills/typography` folder, then replace only the reviewed installed files. To remove, delete only the installed `typography` folder after confirming the path; GitHub CLI 2.100.0 has no remove command for skills. Your project outputs remain in your chosen working folder.
 
-For a contribution, start with [AGENTS.md](AGENTS.md). Report issues with a small synthetic reproduction, browser/version and expected behavior. Do not include private project files, licensed font binaries or credentials. Support is best effort; there is no promised response time. Use repository issues for ordinary bugs and private vulnerability reporting for sensitive findings.
+For a contribution, read [CONTRIBUTING.md](CONTRIBUTING.md) and [AGENTS.md](AGENTS.md), which lists the checks to run. Report issues with a small synthetic reproduction, browser/version and expected behavior. Do not include private project files, licensed font binaries or credentials. Support is best effort; there is no promised response time. Use repository issues for ordinary bugs and [private vulnerability reporting](SECURITY.md) for sensitive findings. [CHANGELOG.md](CHANGELOG.md) records what changed between versions.
 
-The original skill and examples are covered by [LICENSE](LICENSE); a copy sits inside `skills/typography/` so every installed copy carries it. The books, articles and standards in [sources](skills/typography/references/sources.md) retain their respective rights. No book pages, font files or third-party code are redistributed.
+The original skill and examples are covered by the [MIT licence](LICENSE); a copy sits inside `skills/typography/` so every installed copy carries it. The books, articles and standards in [sources](skills/typography/references/sources.md) retain their respective rights. No book pages, font files or third-party code are redistributed.

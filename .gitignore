@@ -1,0 +1,12 @@
+# Local clutter that should never be committed (the tripwire in .github/ also rejects tracked junk).
+.DS_Store
+.env
+.env.local
+__pycache__/
+*.pyc
+.venv/
+venv/
+node_modules/
+.grok/
+settings.local.json
+.lycheecache

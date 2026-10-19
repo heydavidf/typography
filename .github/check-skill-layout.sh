@@ -24,7 +24,8 @@ strays=$(git ls-files | grep -E '(^|/)SKILL\.md$' | grep -v -E '^skills/[^/]+/SK
 $strays"
 
 count=0
-for file in $skills; do
+while IFS= read -r file; do
+  [ -n "$file" ] || continue
   dir=${file%/SKILL.md}
   folder=${dir#skills/}
   count=$((count + 1))
@@ -46,7 +47,7 @@ for file in $skills; do
   elif ! cmp -s LICENSE "$dir/LICENSE"; then
     report "$dir/LICENSE differs from the root LICENSE."
   fi
-done
+done < <(printf '%s\n' "$skills")
 
 [ "$fail" -eq 0 ] && echo "skill layout: $count skill(s) in skills/<name>/, names and licences match"
 exit "$fail"
