@@ -26,10 +26,10 @@ For Codex use `--agent codex`, and for Grok use `--agent grok`. `gh skill instal
 
 ### Manual copy
 
-Without GitHub CLI, clone the repository and copy the skill folder into your agent's skills folder. Run this in a POSIX shell such as bash or zsh. It never overwrites an existing installation:
+Without GitHub CLI, clone the repository and copy the skill folder into your agent's skills folder. Paste this into a terminal running bash or zsh. The first line names Claude Code's skills folder; change it if your agent keeps skills elsewhere. It never overwrites an existing installation:
 
 ```sh
-TYPOGRAPHY_SKILLS_DIR="$HOME/.claude/skills"   # change this to your agent's skills folder
+TYPOGRAPHY_SKILLS_DIR="$HOME/.claude/skills"
 if [ -e "$TYPOGRAPHY_SKILLS_DIR/typography" ]; then
   echo "Typography is already installed in $TYPOGRAPHY_SKILLS_DIR. Move that copy aside before updating."
 elif git clone https://github.com/heydavidf/typography.git typography-repo; then
