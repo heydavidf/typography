@@ -22,11 +22,11 @@ gh skill install heydavidf/typography typography --agent claude-code --scope use
 
 For Codex use `--agent codex`, and for Grok use `--agent grok`. `gh skill install --help` lists every supported agent. `--scope user` makes the skill available in all your projects; leave it out to install into the current repository only. With GitHub CLI 2.100.0, user scope placed the skill in `~/.claude/skills/typography` for Claude Code, `~/.agents/skills/typography` for Codex and `~/.grok/skills/typography` for Grok.
 
-`gh skill` is a preview feature of GitHub CLI and may change without notice. It reminds you to review a skill before use, which is good advice: the installed files are plain Markdown plus one small YAML file. It also adds a `metadata` entry to the installed `SKILL.md` frontmatter so that `gh skill update` can find newer versions later. Without a version it installs the latest tagged release, or `main` when there is none.
+`gh skill` is a preview feature of GitHub CLI and may change without notice. It reminds you to review a skill before use, which is good advice: the installed files are plain Markdown, one small YAML file and the licence. It also adds a `metadata` entry to the installed `SKILL.md` frontmatter so that `gh skill update` can find newer versions later. Without a version it installs the latest tagged release, or `main` when there is none.
 
 ### Manual copy
 
-Without GitHub CLI, clone the repository and copy the skill folder into your agent's skills folder. Paste this into a terminal running bash or zsh. The first line names Claude Code's skills folder; change it if your agent keeps skills elsewhere. It never overwrites an existing installation:
+Without GitHub CLI, clone the repository and copy the skill folder into your agent's skills folder. Paste this into a terminal running bash or zsh. The first line names Claude Code's skills folder; change it if your agent keeps skills elsewhere, writing `$HOME` rather than `~` inside the quotes. It never overwrites an existing installation:
 
 ```sh
 TYPOGRAPHY_SKILLS_DIR="$HOME/.claude/skills"
@@ -75,7 +75,7 @@ The skill gives design guidance, not a universal pairing score, a replacement fo
 
 System font stacks make the bundled specimens self-contained, but exact glyphs vary by platform. A real project must inspect its licensed assets, supported weights, axes, languages and fallback behavior. If an asset or renderer is missing, the agent should state what is missing, preserve the established choice and distinguish a proposal from a verified render.
 
-Every push to `main` and every pull request runs the checks in [`.github/workflows/ci.yml`](.github/workflows/ci.yml): skill layout, tests for those check scripts, Agent Skills format, a tripwire for personal paths, junk files and silenced checks, secret scanning and local links. A weekly run repeats the checks and also tests external links. Before a release the maintainer also installs the skill in a fresh, restricted macOS environment and has an agent apply it to the fictional briefs; those checks run outside this repository, and the example pages were last rendered in Chromium when they changed. None of this establishes automatic discovery in every agent host, real browser zoom, print proof quality or full WCAG conformance. Read the example notes for the distinction between a root-font-size probe and browser zoom.
+Every push to `main` and every pull request runs the checks in [`.github/workflows/ci.yml`](.github/workflows/ci.yml): skill layout, shell blocks in the docs, tests for those check scripts, Agent Skills format, a tripwire for personal paths, junk files and silenced checks, secret scanning and local links. A weekly run repeats the checks and also tests external links. Before a release the maintainer also installs the skill in a fresh, restricted macOS environment and has an agent apply it to the fictional briefs; those checks run outside this repository, and the example pages were last rendered in Chromium when they changed. None of this establishes automatic discovery in every agent host, real browser zoom, print proof quality or full WCAG conformance. Read the example notes for the distinction between a root-font-size probe and browser zoom.
 
 Counterform is an optional specimen/export companion when separately available. The skill and examples do not require it or another unpublished skill.
 

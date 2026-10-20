@@ -13,7 +13,7 @@ The skill's instructions and references, and the example pages, are unchanged in
 
 ### Added
 
-- Automatic checks on every push to `main` and every pull request in `.github/workflows/ci.yml`: skill layout, tests for the check scripts, Agent Skills format, a tripwire for personal paths, junk files and silenced checks, secret scanning, and links (external links weekly).
+- Automatic checks on every push to `main` and every pull request in `.github/workflows/ci.yml`: skill layout, shell blocks in the docs, tests for the check scripts, Agent Skills format, a tripwire for personal paths, junk files and silenced checks, secret scanning, and links (external links weekly).
 - Dependabot updates for the pinned CI actions.
 - `SECURITY.md`, `CONTRIBUTING.md`, `.gitignore`, this changelog, and working rules for contributors and their agents in `AGENTS.md`.
 

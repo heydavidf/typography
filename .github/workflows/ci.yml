@@ -1,6 +1,6 @@
 # Checks for this Markdown-only agent skill repository. The skill has no code to lint or unit-test,
-# so the checks are: skill layout, tests for the check scripts, Agent Skills format, tripwire,
-# secrets and links.
+# so the checks are: skill layout, shell blocks in the docs, tests for the check scripts, Agent Skills
+# format, tripwire, secrets and links.
 # Runs on every push to main, on pull requests and weekly (the weekly run also checks external links).
 # AGENTS.md lists the same checks for running locally.
 name: checks
@@ -37,6 +37,9 @@ jobs:
 
       - name: Skill layout (where gh skill install looks)
         run: bash .github/check-skill-layout.sh
+
+      - name: Shell blocks in the docs paste cleanly
+        run: bash .github/check-shell-blocks.sh
 
       - name: Tests for the check scripts
         run: bash .github/test-checks.sh
