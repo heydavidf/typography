@@ -2,7 +2,7 @@
 
 Notable changes to this repository. Version numbers follow [semantic versioning](https://semver.org/); a version gets its date when it is tagged.
 
-## Unreleased (proposed 1.0.0)
+## 1.0.0 (2026-10-20)
 
 The skill's instructions and references, and the example pages, are unchanged in this version. Only their location and the repository around them changed; the example notes got one updated link.
 
