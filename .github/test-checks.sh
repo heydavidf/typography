@@ -9,6 +9,7 @@ set -uo pipefail
 
 root=$(git rev-parse --show-toplevel 2>/dev/null) || { echo "Run this inside the repository (git is required)."; exit 1; }
 layout="$root/.github/check-skill-layout.sh"
+blocks="$root/.github/check-shell-blocks.sh"
 tripwire="$root/.github/tripwire.sh"
 work=$(mktemp -d "${TMPDIR:-/tmp}/typography-checks.XXXXXX") || exit 1
 trap 'rm -rf -- "$work"' EXIT
@@ -68,6 +69,35 @@ g -C "$d" mv skills/typography "skills/type graphy"
 expect 1 "layout: folder name with a space fails without breaking the loop" in_dir "$d" bash "$layout"
 
 expect 1 "layout: outside a git repository fails" in_dir "$work" bash "$layout"
+
+# Shell blocks in the docs
+d=$(fixture blocks-ok)
+expect 0 "shell blocks: this repository passes" in_dir "$d" bash "$blocks"
+
+d=$(fixture blocks-comment)
+printf '\n```sh\nDIR="$HOME/skills"   %s change this to your agent%ss folder\n```\n' '#' "'" >> "$d/README.md"
+g -C "$d" commit -q -am "comment in a shell block"
+expect 1 "shell blocks: a trailing comment fails (it breaks a paste into interactive zsh)" in_dir "$d" bash "$blocks"
+
+d=$(fixture blocks-comment-line)
+printf '\n```bash\n%s Replace the example above.\necho ok\n```\n' '#' >> "$d/AGENTS.md"
+g -C "$d" commit -q -am "comment line in a shell block"
+expect 1 "shell blocks: a whole-line comment fails" in_dir "$d" bash "$blocks"
+
+d=$(fixture blocks-quoted-hash)
+printf '\n```sh\npip install %spkg @ git+https://example.invalid/x.git%ssubdirectory=y%s\necho "a %s b"\n```\n' "'" '#' "'" '#' >> "$d/README.md"
+g -C "$d" commit -q -am "hash inside quotes"
+expect 0 "shell blocks: a # inside quotes or a URL passes" in_dir "$d" bash "$blocks"
+
+d=$(fixture blocks-syntax)
+printf '\n```sh\nif [ -e x ]; then\n  echo y\n```\n' >> "$d/README.md"
+g -C "$d" commit -q -am "unterminated if"
+expect 1 "shell blocks: a block that does not parse fails" in_dir "$d" bash "$blocks"
+
+d=$(fixture blocks-text)
+printf '\n```text\nnot shell # anything goes here\n```\n' >> "$d/README.md"
+g -C "$d" commit -q -am "text block"
+expect 0 "shell blocks: text blocks are not checked" in_dir "$d" bash "$blocks"
 
 # Tripwire: git problems must fail, never report clean
 d=$(fixture trip-ok)
