@@ -20,13 +20,15 @@ Read the README install/use route before changing the package. Work on specimen 
 Run these from the repository root before saying a change is done. CI runs the same checks in `.github/workflows/ci.yml` on every push to `main` and on pull requests. A weekly run repeats them without a base commit (so without the silenced-check comparison) and also checks external links.
 
 ```sh
-bash .github/check-skill-layout.sh       # skill folder, name and licence copy
-bash .github/test-checks.sh              # tests for the two check scripts
-bash .github/tripwire.sh origin/main     # personal paths, junk files, checks silenced since main
-gitleaks git --redact --no-banner .      # secrets in history (gitleaks v8)
-gitleaks dir --redact --no-banner .      # secrets in the working files
-lychee --offline --no-progress .         # local links in Markdown and HTML
+bash .github/check-skill-layout.sh
+bash .github/test-checks.sh
+bash .github/tripwire.sh origin/main
+gitleaks git --redact --no-banner .
+gitleaks dir --redact --no-banner .
+lychee --offline --no-progress .
 ```
+
+In order: the skill folder, name and licence copy; tests for the two check scripts; personal paths, junk files and checks silenced since `main`; secrets in history and in the working files (gitleaks v8); local links in Markdown and HTML.
 
 The tripwire takes the commit your change started from (`origin/main` in an ordinary clone of the GitHub repository). It fails if that commit is not available, rather than reporting clean; leave the argument out only to skip the silenced-check comparison on purpose. If you change a check script, add or update a case in `.github/test-checks.sh`. For the Agent Skills format check use Python 3.11+ and the official validator in a disposable environment:
 
