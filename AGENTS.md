@@ -13,7 +13,7 @@ This repository is a standalone typography skill. `skills/typography/SKILL.md` i
 
 Keep the skill folder name equal to the `name` in its `SKILL.md`, and keep `SKILL.md` out of the repository root: `gh skill` looks for `skills/<name>/SKILL.md`. The repository ships one skill. A further skill would need its own `skills/<name>/` folder with a `SKILL.md` whose `name` matches the folder, everything it uses at run time, and a copy of the root `LICENSE`; the layout check and CI already cover every `skills/*/` folder, and the README would need its own install line.
 
-Read the README install/use route before changing the package. Work on specimen copies outside the installation. Preserve copy, identity, semantic order and optional Counterform status. Do not bundle commercial/private font files or book pages. Update affected guidance and examples together; never turn a convenient numeric range into a universal accessibility rule. Add a line to `CHANGELOG.md` under Unreleased for any change a user would notice.
+Read the README install/use route before changing the package. Work on specimen copies outside the installation. Preserve copy, identity, semantic order and optional Counterform status. Do not bundle commercial/private font files or book pages. Update affected guidance and examples together; never turn a convenient numeric range into a universal accessibility rule. For any change a user would notice, add a line to `CHANGELOG.md` under an `## Unreleased` heading at the top (add the heading if it is not there yet).
 
 ## Checks
 
