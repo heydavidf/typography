@@ -1,0 +1,2 @@
+# tripwire-allow: bloomsbury.com answers automated link checkers with a Cloudflare bot challenge (HTTP 403), so the weekly external check can never pass on this one publisher page. It opened normally in a browser on 2026-10-27. Remove this entry if the site stops blocking checkers.
+^https://www\.bloomsbury\.com/uk/advanced-typography-9781350055919/?$
